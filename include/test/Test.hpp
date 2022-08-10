@@ -1,10 +1,14 @@
+#include <iostream>
 #include <LBlocks/LBlocks.hpp>
+#include <conio.h>
+#include <Windows.h>
+#include <LBlocks/LLog.hpp>
 
 namespace lee
 {
     namespace blocks
     {
-        namespace test
+        namespace pd_controller_test
         {
             // Simple observer block
             struct ObserverOutput{double Pos, Vel;};
@@ -159,6 +163,34 @@ namespace lee
                 inline double &getRefPos() { return *this->DataInput; };
                 inline double &getRealPos() { return *this->DataOutput; };
             };
-        } // namespace test
+
+            void test()
+            {
+                double RefPos = 1.0;
+                double RealPos = 0.0;
+                int Key = 0;
+                Sys sys;
+                LLog<double> Log;
+                sys.setInput(&RefPos);
+                sys.setOutput(&RealPos);
+                sys.init();
+                std::cout<<"start"<<std::endl;
+                while(Key!=' ')
+                {
+                    Key = 0;
+                    if(_kbhit())
+                    {
+                        Key = _getch();
+                    }
+                    sys.run();
+                    sys.print();
+
+                    Log.startLog();
+                    Log.addLog(RefPos,  "Ref Position");
+                    Log.addLog(RealPos, "Real Position");
+                }
+                Log.saveLog("test.dat");
+            }
+        } // namespace pd_controller_test
     } // namespace block
 } // namespace lee
