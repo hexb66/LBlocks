@@ -74,7 +74,8 @@ public:
             this->Pong.lock();
             this->Ping.unlock();
             this->Msg = "Wait Res  ";
-            std::this_thread::sleep_for(std::chrono::microseconds(1));
+            // Next line should be replaced by better way to give enough time to trigger the sub thread.
+            std::this_thread::sleep_for(std::chrono::microseconds(100));
         }
         if(this->Count++>=this->WaitCount)
         {

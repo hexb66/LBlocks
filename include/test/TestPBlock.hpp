@@ -17,11 +17,11 @@ protected:
         return 0;
     };
 public:
-    Block()
+    Block(const char *Name = "TestParallelBlock")
     {
-        this->BlockName = "TestParallelBlock";
+        this->BlockName = Name;
         this->setWaitCount(0);
-        this->setWaitTimeMs(1);
+        this->setWaitTimeMs(5);
         this->k = 0;
     };
 
