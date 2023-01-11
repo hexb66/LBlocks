@@ -79,7 +79,7 @@ public:
         }
         if(this->Count++>=this->WaitCount)
         {
-            if(this->Ping.try_lock_for(std::chrono::milliseconds(this->MaxWaitTimeMs)))
+            if(this->Ping.try_lock_for(std::chrono::microseconds(this->MaxWaitTimeMs)))
             {
                 this->Pong.unlock();
                 this->Count = 0;
