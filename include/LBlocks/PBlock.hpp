@@ -68,14 +68,22 @@ public:
 
     int run()
     {
-        if(this->Count==0)
+        if (this->WaitCount == 0)
+        {
+            this->input     ();
+            this->spinOnce  ();
+            this->output    ();
+            this->Msg = "Output OK!";
+            return -1;
+        }
+        if (this->Count == 0)
         {
             this->input();
             this->Pong.lock();
             this->Ping.unlock();
             this->Msg = "Wait Res  ";
             // Next line should be replaced by better way to give enough time to trigger the sub thread.
-            std::this_thread::sleep_for(std::chrono::microseconds(100));
+            // std::this_thread::sleep_for(std::chrono::microseconds(100));
         }
         if(this->Count++>=this->WaitCount)
         {
