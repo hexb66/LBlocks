@@ -65,7 +65,7 @@ namespace lee{namespace blocks{
         void initMemory(const unsigned int &_Kinds, const unsigned int &_Num)
         {
             this->DataList.resize(_Kinds);
-            for(int i=0;i<_Kinds;i++)
+            for(unsigned int i=0;i<_Kinds;i++)
             {
                 this->DataList[i].reserve(_Num);
             }
